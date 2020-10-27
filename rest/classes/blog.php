@@ -23,6 +23,14 @@ class Blog{
         }
         return false;
     }
+    
+    public function get_all_blogs(){
+        $query = "SELECT * FROM $this->blogs_tbl ORDER BY id DESC";
+        $query_obj = $this->conn->prepare($query);
+        $query_obj->execute();
+        return $query_obj->get_result();
+    }
+
 }
 
 

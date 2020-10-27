@@ -64,26 +64,40 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       ));
     }
 }else if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    /*
+    
     if($path_params[1] != null){
-        settype($path_params[1] , 'integer');
-        $query = "SELECT * FROM blogs WHERE id = $path_params[1]";    
+       //return blog by id
     }
     else{
-        $query = "SELECT b.id , b.name , b.author , b.isbn FROM book AS b";
-    }
-    $result = mysqli_query($link,$query) or die("mysql query filed" . mysqli_error());
-    echo "<books>";
-    while($line = mysqli_fetch_array($result , 1)){
-        echo "<book>";
-        foreach($line as $key => $col_value){
-            echo "<$key> $col_value </$key>";
+        //return all the blogs
+        $blogs = $blog_obj->get_all_blogs();
+        if($blogs->num_rows > 0){
+            $blogs_array = array();
+            while($row = $blogs->fetch_assoc() ){
+                $blogs_array[] = array(
+                    "id" => $row["id"],
+                    "blog_title" =>$row["title"],
+                    "blog_body" => $row["body"],
+                    "user_id" => $row["user_id"],
+                    "date" => $row["date"]
+                ) ;
+            }
+            http_response_code(200);     //ok
+            echo json_encode(array(
+                "status" => 1,
+                "blogs" => $blogs_array
+            ));
         }
-        echo "</book>";
+        else{
+            http_response_code(404);
+            echo json_encode(array(
+                "status" => 0,
+                "message" => "No projects found"
+            ));
+        }
     }
-    echo "</books>";
-    mysqli_free_result($result);
-    */
+    
+    
 }
 
 
