@@ -3,6 +3,7 @@
 ini_set("display_errors", 1);
 require '../../vendor/autoload.php';
 
+
 use \Firebase\JWT\JWT;
 
 include_once("initialize.php");
@@ -46,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     ));
             }
 
-        }catch(Exeception $ex){
+        }catch(Exception $ex){
             http_response_code(500);
                 echo json_encode(array(
                     "status" => 0,
@@ -63,7 +64,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       ));
     }
 }else if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    
+    /*
+    if($path_params[1] != null){
+        settype($path_params[1] , 'integer');
+        $query = "SELECT * FROM blogs WHERE id = $path_params[1]";    
+    }
+    else{
+        $query = "SELECT b.id , b.name , b.author , b.isbn FROM book AS b";
+    }
+    $result = mysqli_query($link,$query) or die("mysql query filed" . mysqli_error());
+    echo "<books>";
+    while($line = mysqli_fetch_array($result , 1)){
+        echo "<book>";
+        foreach($line as $key => $col_value){
+            echo "<$key> $col_value </$key>";
+        }
+        echo "</book>";
+    }
+    echo "</books>";
+    mysqli_free_result($result);
+    */
 }
 
 
