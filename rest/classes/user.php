@@ -4,19 +4,11 @@ class User{
     public $email;
     public $username;
     public $password;
-    public $user_id;
-    public $blog_name;
-    public $blog_body;
-    public $status;
-
-    private $conn;
     private $users_tbl;
-    private $blogs_tbl;
 
     public function __construct($conn){
         $this->conn = $conn;
         $this->users_tbl = "users";
-        $this->blogs_tbl = "blogs";
     }
 
     function add_user(){
@@ -68,7 +60,6 @@ class User{
         }
         return true;
     }
-
 }
 
 

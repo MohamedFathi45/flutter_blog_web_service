@@ -7,6 +7,7 @@
 
     require_once(INC_PATH . DS . "config.php");
 
-    require_once(CLASSES_PATH . DS . "user.php")
+    require_once(CLASSES_PATH . DS . "user.php");
+    require_once(CLASSES_PATH . DS . "blog.php");
 
 ?>
