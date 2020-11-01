@@ -12,13 +12,12 @@ $dp = new Database();
 $connection = $dp->connect();
 $user_obj = new User($connection);
 
-if($_SERVER['REQUEST_METHOD'] === "POST"){
+if($_SERVER['REQUEST_METHOD'] == "POST"){
     $data =json_decode(file_get_contents("php://input"));
     if( !empty($data->email) && !empty($data->password)  && !empty($data->username)){
         $user_obj->username = $data->username;
         $user_obj->password = password_hash($data->password , PASSWORD_DEFAULT);
         $user_obj->email = $data->email;
-
         $email_data = $user_obj->check_email();
         if(!empty($email_data)){
             http_response_code(500);
